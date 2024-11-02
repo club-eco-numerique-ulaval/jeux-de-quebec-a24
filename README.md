@@ -1,4 +1,4 @@
-# collecte-dechets-h24
+# jeux-de-quebec-a24
 
 ## Recommended IDE Setup
 
