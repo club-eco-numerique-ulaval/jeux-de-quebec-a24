@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from data.extractIngredients import getIngredientsnameByCupCode
-from data.extractRecipes import getRecipes
+from data.extractRecipes import getRecipesInformations
 
 
 class RecipeResource:
@@ -27,7 +27,7 @@ class RecipeResource:
         args = request.args
         ingredients = args.getlist("ingredients")
 
-        recipes = getRecipes(ingredients)
+        recipes = getRecipesInformations(ingredients)
 
         return jsonify({"recipes": recipes})
 
