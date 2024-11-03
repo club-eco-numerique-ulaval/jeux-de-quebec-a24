@@ -5,8 +5,12 @@ from data.extractRecipes import getRecipesInformations
 
 class RecipeResource:
     
-    def __init__(self, app: Flask) -> None:
+    CORS_HEADER = "Access-Control-Allow-Origin"
+    CORS_EXPRESSION = "*"
+
+    def __init__(self, app: Flask, off_export: pd.DataFrame) -> None:
         self.__app = app
+        self.off_export = off_export
         self.register_routes()
 
     def register_routes(self):
@@ -18,9 +22,11 @@ class RecipeResource:
         args = request.args
         ingredientsCupCodes = args.getlist("ingredientsCodes")
 
-        ingredientsNames = getIngredientsnameByCupCode(ingredientsCupCodes)
+        ingredientsNames = getIngredientsnameByCupCode(ingredientsCupCodes, self.off_export)
 
-        return jsonify({"ingredients": ingredientsNames})
+        response = jsonify({"ingredients": ingredientsNames})
+        response.headers.add(self.CORS_HEADER, self.CORS_EXPRESSION)
+        return response
     
 
     def getRecipesByIngredientsNames(self):
@@ -29,7 +35,9 @@ class RecipeResource:
 
         recipes = getRecipesInformations(ingredients)
 
-        return jsonify({"recipes": recipes})
+        response = jsonify({"recipes": recipes})
+        response.headers.add(self.CORS_HEADER, self.CORS_EXPRESSION)
+        return response
 
 
 
