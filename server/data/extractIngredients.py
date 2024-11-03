@@ -1,16 +1,13 @@
 import pandas as pd
 
 
-def getIngredientsnameByCupCode(ingredientsCodes):
-    OFF_EXPORT_PATH = "D:\Projet_programmation\Projet_CEN\jeux-de-quebec-a24\server\openfoodfacts_export.csv"
-    
-    df = pd.read_csv(OFF_EXPORT_PATH, delimiter="\t", dtype={"code": str})
+def getIngredientsnameByCupCode(ingredientsCodes, off_export: pd.DataFrame):
     ingredientsCodes = ingredientsCodes[0].split(",")
     
     ingredientsNames = []
     for code in range(len(ingredientsCodes)):
         
-        res = df[df["code"] == ingredientsCodes[code]]
+        res = off_export[off_export["code"] == ingredientsCodes[code]]
         
         productCode = res.code
         productNameEn = res.product_name_en
