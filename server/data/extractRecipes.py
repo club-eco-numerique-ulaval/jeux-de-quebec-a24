@@ -10,7 +10,8 @@ def getRecipes(ingredients):
     header = {"Content-Type": "application/json"}
 
     SPOONACULAR_API_KEY = os.getenv("SPOONACULAR_API_KEY")
-    response = requests.get(f"{BASE_URL}apiKey={SPOONACULAR_API_KEY}", params=params, headers=header)
+    NUMBER_OF_RECIPES = 10
+    response = requests.get(f"{BASE_URL}apiKey={SPOONACULAR_API_KEY}&number={NUMBER_OF_RECIPES}", params=params, headers=header)
 
     recipes = {}
     if response.status_code == 200:
