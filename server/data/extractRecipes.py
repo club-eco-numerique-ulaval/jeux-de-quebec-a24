@@ -34,28 +34,3 @@ def getRecipesInformations(ingredients):
 
     else:
         print('Request failed with status code:', response.status_code)
-
-
-# def getRecipesInformations(recipes):
-#     header = {"Content-Type": "application/json"}
-
-#     recipesInfoResults = []
-#     for recipe in recipes:
-#         recipeInfo = {}
-#         recipeId = recipe["id"]
-#         usedIngredientCount = recipe["usedIngredientCount"]
-
-#         responseRecipesInfo = requests.get(f"{BASE_URL}{recipeId}/information?apiKey={SPOONACULAR_API_KEY}", headers=header)
-
-#         if responseRecipesInfo.status_code == 200:
-#             recipeInfo = recipeId
-#             recipeInfo = usedIngredientCount
-#             recipeInfo = responseRecipesInfo.json()
-
-#             recipesInfoResults.append(recipeInfo)
-
-#         else:
-#             print('Request failed with status code:', responseRecipesInfo.status_code)
-#             break
-    
-#     return recipesInfoResults
