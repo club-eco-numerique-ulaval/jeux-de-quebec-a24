@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from data.extractIngredients import getIngredientsnameByCupCode
 from data.extractRecipes import getRecipesInformations
+import pandas as pd
 
 
 class RecipeResource:
@@ -22,9 +23,9 @@ class RecipeResource:
         args = request.args
         ingredientsCupCodes = args.getlist("ingredientsCodes")
 
-        ingredientsNames = getIngredientsnameByCupCode(ingredientsCupCodes, self.off_export)
+        ingredientDetails = getIngredientsnameByCupCode(ingredientsCupCodes, self.off_export)
 
-        response = jsonify({"ingredients": ingredientsNames})
+        response = jsonify({"ingredients": ingredientDetails})
         response.headers.add(self.CORS_HEADER, self.CORS_EXPRESSION)
         return response
     

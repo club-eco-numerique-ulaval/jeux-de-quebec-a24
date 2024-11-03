@@ -54,7 +54,7 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 3. Run the UI in Development Mode (with Hot-Reloading):
      ```bash
-     npm run serve
+     npm run dev
      ```
      - The UI will run at [`localhost:5173`](http://localhost:5173).
 

@@ -1,47 +1,43 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref } from "vue";
+import BarCodeScanner from "./components/BarCodeScanner.vue";
+import { computed } from "vue";
+import RecipeList from "./components/RecipeList.vue";
+
+const recipes = ref([]);
+const n_ingredients = ref(0);
+
+const displayScanner = computed(() => {
+  return recipes.value.length === 0;
+});
+
+const handleUseIngredients = (ingredients) => {
+  fetch(`http://127.0.0.1:5000/recipes?ingredients=${ingredients.toString()}`)
+    .then((response) => {
+      return response.json();
+    })
+    .then((body) => {
+      console.log(body)
+
+      const ui_recipes = [];
+
+      n_ingredients.value = body.recipes.length;
+
+      for (const recipe of body.recipes) {
+        ui_recipes.push({
+          name: recipe.recipeInfo.title,
+          url: recipe.recipeInfo.sourceUrl,
+          n_used_ingredients: recipe.usedIngredientCount,
+        });
+      }
+
+      recipes.value = ui_recipes;
+    });
+};
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <BarCodeScanner @use-ingredients="handleUseIngredients" v-if="displayScanner">
+  </BarCodeScanner>
+  <RecipeList :recipes="recipes" :n_ingredients="n_ingredients" v-if="!displayScanner"></RecipeList>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
