@@ -10,6 +10,16 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
 
+## Data
+A `.env` file at the root of `server` with a Spoonacular API key is necessary to use the app.
+```
+SPOONACULAR_API_KEY = <Your API key>
+```
+
+A CSV file containing data from the Open Food Facts database is also necessary. The file path needs to be assigned to the constant `OFF_EXPORT_PATH` in `server/main.py`
+
+The necessary attribution text for the use of data from the two sources is already present in the UI.
+
 ### Server Setup
 
 1. Navigate to the `/server` directory:
