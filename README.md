@@ -18,7 +18,7 @@ SPOONACULAR_API_KEY = <Your API key>
 
 A CSV file containing data from the Open Food Facts database is also necessary. The file path needs to be assigned to the constant `OFF_EXPORT_PATH` in `server/main.py`
 
-The necessary attribution text for the use of data from the two sources is already present in the UI.
+The necessary attribution text for the use of data from the two sources at the time of writing is already present in the UI.
 
 ### Server Setup
 
