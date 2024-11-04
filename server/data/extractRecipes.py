@@ -11,7 +11,7 @@ def getRecipesInformations(ingredients):
     params = {"ingredients": ingredients}
     header = {"Content-Type": "application/json"}
 
-    NUMBER_OF_RECIPES = "2"
+    NUMBER_OF_RECIPES = "3"
     response = requests.get(f"{BASE_URL}findByIngredients?apiKey={SPOONACULAR_API_KEY}&number={NUMBER_OF_RECIPES}", params=params, headers=header)
 
     recipesInfo = []

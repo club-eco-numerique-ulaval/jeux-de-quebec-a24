@@ -12,6 +12,9 @@ const displayScanner = computed(() => {
 });
 
 const handleUseIngredients = (ingredients) => {
+  ingredients = ingredients.map(a => a.name)
+  n_ingredients.value = ingredients.length;
+
   fetch(`http://127.0.0.1:5000/recipes?ingredients=${ingredients.toString()}`)
     .then((response) => {
       return response.json();
@@ -20,8 +23,6 @@ const handleUseIngredients = (ingredients) => {
       console.log(body)
 
       const ui_recipes = [];
-
-      n_ingredients.value = body.recipes.length;
 
       for (const recipe of body.recipes) {
         ui_recipes.push({
